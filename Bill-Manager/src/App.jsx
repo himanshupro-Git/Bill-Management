@@ -4,17 +4,19 @@ import { useState } from 'react'
 import InputBox from './components/InputBox'
 import ListItem from './components/ListItem';
 import Totalbill from './components/Totalbill';
+import products from './data/products.json';
 function App() {
 
 const [name, setName] = useState("");
 const [price, setPrice] = useState("");
 const [quantity, setQuantity] = useState("");
 const [items, setItems] = useState([]);
+const [suggestion, setSuggestion] = useState([]);
 
 
 const itemCount = items.reduce((sum, item)=>sum + item.quantity,0);
-const subtotal = items.reduce((sum, item)=>sum + item.price, 0);
-const tax = subtotal+0.18 ;
+const subtotal = items.reduce((sum, item)=>sum + item.price*itemCount, 0);
+const tax = subtotal*0.30 ;
 const total = subtotal + tax;
 
 
@@ -37,9 +39,22 @@ setQuantity("");
 function handleDelete(indexToDelete){
   const updatedItems = items.filter((_, index)=>index!==indexToDelete);
   setItems(updatedItems)
-
-
 }
+
+function handleNameChange(value){
+    setName(value);
+
+    if(value ===""){
+      setSuggestion([]);
+      return;
+    }
+    const filtered = products.filter(product =>
+            product.name.toLowerCase().includes(value.toLowerCase())
+        );
+    setSuggestion(filtered);
+  }
+
+
   return (
     <div className='outerMainBox'>
 
@@ -53,14 +68,36 @@ function handleDelete(indexToDelete){
       quantity={quantity}
       setQuantity={setQuantity}
       handleAdd={handleAdd}
+      handleNameChange = {handleNameChange}
+      suggestion = {suggestion}
 
       />
+      
+        
+    <div className='suggestion'>
+        {suggestion.map((item, index)=>(
+            <div key = {index}
+            onClick={() => {
+              setName(item.name);
+              setPrice(item.price);
+              setSuggestion([]);
+              
+            }}
+            className='suggestionBox'
+            > 
+              {/* <p>suggestion</p> */}
+              {item.name} -  ₹{item.price}
+            </div>
+          ))}
+      </div>
+
+
       <ListItem
       items = {items}
       handleDelete={handleDelete}
       />
       </div>
-
+      
       <Totalbill 
       items = {items}
       itemCount = {itemCount}

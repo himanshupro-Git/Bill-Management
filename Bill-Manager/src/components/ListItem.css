@@ -25,3 +25,9 @@
     font-weight: 700;
     box-shadow: 3px 3px black;
 }
+
+.itemRow{
+    display: flex;
+    align-items:center ;
+    justify-content: space-around;
+}

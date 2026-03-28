@@ -1,12 +1,12 @@
 import './InputBox.css'
-export default function InputBox({name, setName,price, setPrice,quantity, setQuantity, handleAdd}){
+export default function InputBox({name, setName,price, setPrice,quantity, setQuantity, handleAdd, handleNameChange, suggestion}){
     return(
         <div className='inputBox'>
             <input type="text"
             className='input'
             placeholder="Write here"
             value={name}
-            onChange={(e)=>setName(e.target.value)}
+            onChange={(e)=>handleNameChange(e.target.value)}
             />
 
             <input type="number" 
@@ -23,8 +23,9 @@ export default function InputBox({name, setName,price, setPrice,quantity, setQua
             placeholder='Count'
             value={quantity}
             onChange={(e)=>setQuantity(e.target.value)}
+            
             />
-
+            
             <button onClick={handleAdd}
             className='addButton'
             >Add</button>

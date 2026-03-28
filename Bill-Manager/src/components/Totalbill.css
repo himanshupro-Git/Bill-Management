@@ -3,3 +3,15 @@
     margin-top: 2px;
     margin-bottom: 2px;
 }
+
+.printButton{
+    height: 33px;
+    width: auto;
+    border-radius: 7px ;
+    cursor: pointer;
+    margin-left: 2px;
+    font-weight: 700;
+    box-shadow: 3px 3px black;
+    padding: 5px;
+    margin-top: 5px;
+}
