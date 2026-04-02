@@ -10,9 +10,10 @@
     font-weight: 700;
     box-shadow: 3px 3px black;
     margin-top: 3px;
-    /* text-align: right; */
     padding-left:3px;
     margin-left: 5px;
+    
+  
     
    
 }
@@ -25,10 +26,19 @@
     font-weight: 700;
     box-shadow: 3px 3px black;
     margin-left: 5px;
+
 }
 #priceInput{
     width: 80px;
+    
 }
+#priceInput::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
+
 #quantityInput{
     width: 80px;
+}
+#quantityInput::-webkit-inner-spin-button{
+    -webkit-appearance: none;
 }

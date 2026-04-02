@@ -15,3 +15,6 @@
     padding: 5px;
     margin-top: 5px;
 }
+.totalBillBox{
+    animation: glowpulse 3s ease-in-out infinite;
+}
