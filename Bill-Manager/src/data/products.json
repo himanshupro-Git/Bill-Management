@@ -1,22 +1,29 @@
 [
-  { "name": "Milk", "price": 50 },
-  { "name": "Bread", "price": 30 },
-  { "name": "Eggs", "price": 10 },
-  { "name": "Butter", "price": 60 },
-  { "name": "Cheese", "price": 120 },
-  { "name": "Rice", "price": 80 },
-  { "name": "Sugar", "price": 45 },
-  { "name": "Salt", "price": 20 },
-  { "name": "Flour", "price": 55 },
-  { "name": "Cooking Oil", "price": 150 },
-  { "name": "Maggi", "price": 14 },
-  { "name": "Biscuits", "price": 20 },
-  { "name": "Chips", "price": 25 },
-  { "name": "Coke", "price": 40 },
-  { "name": "Pepsi", "price": 40 },
-  { "name": "Tea", "price": 100 },
-  { "name": "Coffee", "price": 200 },
-  { "name": "Soap", "price": 35 },
-  { "name": "Shampoo", "price": 120 },
-  { "name": "Toothpaste", "price": 90 }
+  {
+    "id": "P001",
+    "name": "Milk",
+    "barcode": "890100000001",
+    "price": 50,
+    "gstRate": 5,
+    "stock": 100,
+    "category": "Dairy"
+  },
+  {
+    "id": "P002",
+    "name": "Bread",
+    "barcode": "890100000002",
+    "price": 40,
+    "gstRate": 5,
+    "stock": 50,
+    "category": "Bakery"
+  },
+  {
+    "id": "P003",
+    "name": "Eggs",
+    "barcode": "890100000003",
+    "price": 70,
+    "gstRate": 0,
+    "stock": 80,
+    "category": "Dairy"
+  }
 ]
