@@ -1,115 +1,3 @@
-// import './app.css'
-
-// import { useState } from 'react'
-// import InputBox from './components/InputBox'
-// import ListItem from './components/ListItem';
-// import Totalbill from './components/Totalbill';
-// import products from './data/products.json';
-// function App() {
-
-// const [name, setName] = useState("");
-// const [price, setPrice] = useState("");
-// const [quantity, setQuantity] = useState("");
-// const [items, setItems] = useState([]);
-// const [suggestion, setSuggestion] = useState([]);
-
-
-// const itemCount = items.reduce((sum, item)=>sum + item.quantity,0);
-// const subtotal = items.reduce((sum, item)=>sum + item.price*item.quantity, 0);
-// const tax = subtotal*0.30;
-// const total = subtotal + tax;
-
-
-// function handleAdd(){
-//   if(!name || !price || !quantity) return;
-
-//   const newProduct = {
-//   name: name.trim(),
-//   price: Number(price),
-//   quantity: Number(quantity)
-// };
-// setItems([...items, newProduct]);
-
-// setName("");
-// setPrice("");
-// setQuantity("");
-
-// }
-
-// function handleDelete(indexToDelete){
-//   const updatedItems = items.filter((_, index)=>index!==indexToDelete);
-//   setItems(updatedItems)
-// }
-
-// function handleNameChange(value){
-//     setName(value);
-
-//     if(value ===""){
-//       setSuggestion([]);
-//       return;
-//     }
-//     const filtered = products.filter(product =>
-//             product.name.toLowerCase().includes(value.toLowerCase())
-//         );
-//     setSuggestion(filtered);
-//   }
-
-
-//   return (
-//     <div className='outerMainBox'>
-
-//       <div className='mainBox'>
-//       <h2 className='heading'>List Manager</h2>
-//       <InputBox
-//       name = {name}
-//       setName = {setName}
-//       price = {price}
-//       setPrice = {setPrice}
-//       quantity={quantity}
-//       setQuantity={setQuantity}
-//       handleAdd={handleAdd}
-//       handleNameChange = {handleNameChange}
-//       suggestion = {suggestion}
-
-//       />
-      
-        
-//     <div className='suggestion'>
-//         {suggestion.map((item, index)=>(
-//             <div key = {index}
-//             onClick={() => {
-//               setName(item.name);
-//               setPrice(item.price);
-//               setSuggestion([]);
-              
-//             }}
-//             className='suggestionBox'
-//             > 
-//               {/* <p>suggestion</p> */}
-//               {item.name} -  ₹{item.price}
-//             </div>
-//           ))}
-//       </div>
-
-
-//       <ListItem
-//       items = {items}
-//       handleDelete={handleDelete}
-//       />
-//       </div>
-      
-//       <Totalbill 
-//       items = {items}
-//       itemCount = {itemCount}
-//       subtotal = {subtotal}
-//       tax = {tax}
-//       total = {total}
-//       />
-//     </div>
-//   )
-// }
-
-// export default App
 import './app.css';
 import { useState } from 'react';
 import InputBox from './components/InputBox';
@@ -147,6 +35,24 @@ function App() {
   // Final amount
   const total = subtotal + tax;
 
+  // Find a product using name or barcode
+  function findProduct(value) {
+    return products.find(
+      (product) =>
+        product.barcode === value ||
+        product.name.toLowerCase() === value.toLowerCase()
+    );
+  }
+
+  // Select a product
+  function selectProduct(product) {
+    setSelectedProduct(product);
+    setName(product.name);
+    setPrice(product.price);
+    setSuggestion([]);
+  }
+
+  // Add selected product to cart
   function handleAdd() {
     if (!name || !price || !quantity) return;
 
@@ -170,6 +76,7 @@ function App() {
     setSuggestion([]);
   }
 
+  // Delete a product from cart
   function handleDelete(indexToDelete) {
     const updatedItems = items.filter(
       (_, index) => index !== indexToDelete
@@ -178,10 +85,11 @@ function App() {
     setItems(updatedItems);
   }
 
+  // Search products by name
   function handleNameChange(value) {
     setName(value);
 
-    // Clear selected product if user changes the name manually
+    // User is typing manually, so previous selection is cleared
     setSelectedProduct(null);
 
     if (value === "") {
@@ -194,6 +102,15 @@ function App() {
     );
 
     setSuggestion(filtered);
+  }
+
+  // Handle a barcode value
+  function handleBarcode(value) {
+    const product = findProduct(value);
+
+    if (product) {
+      selectProduct(product);
+    }
   }
 
   return (
@@ -219,12 +136,7 @@ function App() {
           {suggestion.map((item) => (
             <div
               key={item.id}
-              onClick={() => {
-                setName(item.name);
-                setPrice(item.price);
-                setSelectedProduct(item);
-                setSuggestion([]);
-              }}
+              onClick={() => selectProduct(item)}
               className="suggestionBox"
             >
               {item.name} - ₹{item.price}

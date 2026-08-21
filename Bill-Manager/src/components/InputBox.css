@@ -1,5 +1,9 @@
 .inputBox{
     margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
 
 }
 .input{
@@ -12,8 +16,6 @@
     margin-top: 3px;
     padding-left:3px;
     margin-left: 5px;
-    
-  
     
    
 }
@@ -28,6 +30,20 @@
     margin-left: 5px;
 
 }
+
+ .scanButton {
+    height: 42px;
+    white-space: nowrap;
+    padding: 0 10px;
+    font-weight: 700;
+    box-shadow: 3px 3px black;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
 #priceInput{
     width: 80px;
     
